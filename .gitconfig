@@ -1,0 +1,13 @@
+[color]
+	ui = true
+[user]
+	name = Saher El-Neklawy
+	email = saher.neklawy@gmail.com
+[alias]
+    st = status
+    stt = status -uno
+    ci = commit
+    br = branch
+    co = checkout
+    df = diff
+    lg = log -p
