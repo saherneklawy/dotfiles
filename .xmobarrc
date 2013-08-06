@@ -1,0 +1,21 @@
+Config { font = "-misc-fixed-*-*-*-*-15-*-*-*-*-*-*-*"
+       , bgColor = "#000000"
+       , fgColor = "#C9A34E"
+       , border = NoBorder
+       , borderColor = "#000000"
+       , position = Top 
+       , lowerOnStart = True
+       , hideOnStart = False
+       , persistent = True
+       , commands = [ Run DynNetwork ["-L", "8", "-H", "32", "-l", "#C9A34E", "-n", "#429942" ,"-h", "#A36666", "-S", "True", "-t", "<dev>: <rx> : <tx>"] 10
+                    , Run Cpu ["-L","3","-H","50","--normal","#429942","--high","#A36666"] 10
+                    , Run Memory ["-t","Mem: <usedratio>%"] 10
+    		    , Run Date "%a %b %_d %Y %H:%M:%S" "date" 10
+                    , Run StdinReader
+                    -- , Run BatteryP ["BAT0"] ["-t", "<acstatus><watts> (<left>%)", "-L", "10", "-H", "80", "-p", "3", "--", "-O", "<fc=green>On</fc> - ", "-i", "", "-L", "-15", "-H", "-5", "-l", "red", "-m", "blue", "-h", "green"] 600
+                    , Run BatteryP ["BAT0"] ["-t", "<acstatus>", "-L", "10", "-H", "80", "-l", "red", "-h", "green", "--", "-O", "Charging: <watts>, <left>% / <timeleft>", "-o", "Batt: <watts>, <left>% / <timeleft>", "-i", "Idle"] 10
+                    ]
+       , sepChar = "%"
+       , alignSep = "}{"
+       , template = " %StdinReader% }{ %battery% <fc=#429942>|</fc> %cpu% <fc=#429942>|</fc> %memory% <fc=#429942>|</fc> %dynnetwork% <fc=#429942>|</fc> %date%"
+       } 

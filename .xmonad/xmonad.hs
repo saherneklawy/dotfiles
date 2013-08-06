@@ -19,11 +19,12 @@ myConfig = defaultConfig
     { terminal    = myTerminal
     , modMask     = myModMask
     , borderWidth = myBorderWidth
+    , workspaces  = myWorkspaces
     }
 
 -- yes, these are functions; just very simple ones
 -- that accept no input and return static values
 myTerminal    = "gnome-terminal"
 myModMask     = mod4Mask -- Win key or Super_L
-myBorderWidth = 3
-
+myBorderWidth = 1
+myWorkspaces    = ["web","code","terms","4", "5", "srvs", "7", "8", "9"]
