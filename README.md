@@ -1,0 +1,6 @@
+
+dependancies:
+
+- trayer
+- xmobar
+- xmonad
