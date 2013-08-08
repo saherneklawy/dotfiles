@@ -1,5 +1,6 @@
 -- Imports.
 import XMonad
+import XMonad.Config.Gnome
 import Data.Monoid
 import System.Exit
 import XMonad.Hooks.DynamicLog
@@ -20,12 +21,13 @@ myPP = xmobarPP { ppCurrent = xmobarColor "#429942" "" . wrap "<" ">" }
 toggleStrutsKey XConfig {XMonad.modMask = modMask} = (modMask, xK_b)
 
 -- Main configuration, override the defaults to your liking.
-myConfig = defaultConfig
+myConfig = gnomeConfig
     { terminal    = myTerminal
     , modMask     = myModMask
     , borderWidth = myBorderWidth
     , workspaces  = myWorkspaces
     , keys        = myKeys
+    , focusFollowsMouse  = myFocusFollowsMouse
     }
 
 -- yes, these are functions; just very simple ones
@@ -35,7 +37,9 @@ myModMask     = mod4Mask -- Win key or Super_L
 myBorderWidth = 1
 myWorkspaces    = ["1:web","2:code","3:terms","4", "5", "6:srvs", "7", "8", "9"]
 
-
+-- Whether focus follows the mouse pointer.
+myFocusFollowsMouse :: Bool
+myFocusFollowsMouse = False
 
 ------------------------------------------------------------------------
 -- Key bindings. Add, modify or remove key bindings here.
