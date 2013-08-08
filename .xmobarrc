@@ -3,7 +3,7 @@ Config { font = "-misc-fixed-*-*-*-*-15-*-*-*-*-*-*-*"
        , fgColor = "#C9A34E"
        , border = NoBorder
        , borderColor = "#000000"
-       , position = Top 
+       , position = TopW L 90
        , lowerOnStart = True
        , hideOnStart = False
        , persistent = True
@@ -17,5 +17,5 @@ Config { font = "-misc-fixed-*-*-*-*-15-*-*-*-*-*-*-*"
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = " %StdinReader% }{ %battery% <fc=#429942>|</fc> %cpu% <fc=#429942>|</fc> %memory% <fc=#429942>|</fc> %dynnetwork% <fc=#429942>|</fc> %date%"
+       , template = " %StdinReader% }{ %battery% <fc=#429942>|</fc> %cpu% <fc=#429942>|</fc> %memory% <fc=#429942>|</fc> %dynnetwork% <fc=#429942>|</fc> <fc=#ffffff>%date%</fc>"
        } 
