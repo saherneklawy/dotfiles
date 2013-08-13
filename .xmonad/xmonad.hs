@@ -18,6 +18,9 @@ import XMonad.Util.Run(spawnPipe)
 import qualified Data.Map        as M
 import qualified XMonad.StackSet as W
 
+-- Data.List provides isPrefixOf isSuffixOf and isInfixOf
+import Data.List
+
 -- The main function.
 main = xmonad =<< statusBar myBar myPP toggleStrutsKey myConfig
 
@@ -39,6 +42,7 @@ myConfig = gnomeConfig
     , keys        = myKeys
     , focusFollowsMouse  = myFocusFollowsMouse
     , layoutHook         = smartBorders $ myLayout
+    , manageHook         = myManageHook
     }
 
 -- yes, these are functions; just very simple ones
@@ -147,6 +151,41 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     [((m .|. modm, key), screenWorkspace sc >>= flip whenJust (windows . f))
         | (key, sc) <- zip [xK_w, xK_e, xK_r] [0..]
         , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
+
+------------------------------------------------------------------------
+-- Window rules
+-- Execute arbitrary actions and WindowSet manipulations when managing
+-- a new window. You can use this to, for example, always float a
+-- particular program, or have a client always appear on a particular
+-- workspace.
+--
+-- To find the property name associated with a program, use
+-- > xprop | grep WM_CLASS # needs package xorg-xprop on arch
+-- and click on the client you're interested in.
+--
+-- To match on the WM_NAME, you can use 'title' in the same way that
+-- 'className' and 'resource' are used below.a
+--
+-- see http://xmonad.org/xmonad-docs/xmonad-contrib/XMonad-Doc-Extending.html#g:15 for more
+--
+
+-- lifting the ~? function to use inside ManagedHooks
+q ~? x = fmap (x `isInfixOf`) q
+
+myManageHook = composeAll
+      [ resource ~? "/tmp/.org.chromium.Chromium"  --> (doShift "9" <+> doFullFloat)
+      , className =? "Google-chrome"               --> doShift "1:web"
+      , className =? "Rhythmbox"                   --> doShift "8"
+      , className =? "Pidgin"                      --> doShift "8" ]
+    --, resource  =? "desktop_window" --> doIgnore
+    --, className =? "Galculator"     --> doFloat
+    --, className =? "Steam"          --> doFloat
+    --, className =? "Gimp"           --> doFloat
+    --, resource  =? "gpicview"       --> doFloat
+    --, className =? "MPlayer"        --> doFloat
+    --, className =? "VirtualBox"     --> doShift "4:vm"
+    --, className =? "Xchat"          --> doShift "5:media"
+    -- , isFullscreen --> (doF W.focusDown <+> doFullFloat)]
 
 ------------------------------------------------------------------------
 -- Layouts
