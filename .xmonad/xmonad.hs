@@ -5,6 +5,16 @@ import Data.Monoid
 import System.Exit
 import XMonad.Hooks.DynamicLog
 
+import XMonad.Hooks.ManageDocks
+import XMonad.Hooks.ManageHelpers
+import XMonad.Hooks.SetWMName
+import XMonad.Layout.Fullscreen
+import XMonad.Layout.NoBorders
+import XMonad.Layout.Spiral
+import XMonad.Layout.Tabbed
+-- import XMonad.Layout.Named
+import XMonad.Util.Run(spawnPipe)
+
 import qualified Data.Map        as M
 import qualified XMonad.StackSet as W
 
@@ -28,6 +38,7 @@ myConfig = gnomeConfig
     , workspaces  = myWorkspaces
     , keys        = myKeys
     , focusFollowsMouse  = myFocusFollowsMouse
+    , layoutHook         = smartBorders $ myLayout
     }
 
 -- yes, these are functions; just very simple ones
@@ -136,3 +147,31 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     [((m .|. modm, key), screenWorkspace sc >>= flip whenJust (windows . f))
         | (key, sc) <- zip [xK_w, xK_e, xK_r] [0..]
         , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
+
+------------------------------------------------------------------------
+-- Layouts
+-- You can specify and transform your layouts by modifying these values.
+-- If you change layout bindings be sure to use 'mod-shift-space' after
+-- restarting (with 'mod-q') to reset your layout state to the new
+-- defaults, as xmonad preserves your old layout settings by default.
+--
+-- The available layouts.  Note that each layout is separated by |||,
+-- which denotes layout choice.
+--
+myLayout = avoidStruts (
+    Tall 1 (3/100) (1/2) |||
+    Mirror (Tall 1 (3/100) (1/2)) |||
+    tabbed shrinkText tabConfig |||
+    spiral (6/7)) |||
+    Full -- |||
+    -- Named "FullScreen" (noBorders (fullscreenFull Full))
+
+-- Colors for text and backgrounds of each tab when in "Tabbed" layout.
+tabConfig = defaultTheme {
+    activeBorderColor = "#7C7C7C",
+    activeTextColor = "#CEFFAC",
+    activeColor = "#000000",
+    inactiveBorderColor = "#7C7C7C",
+    inactiveTextColor = "#EEEEEE",
+    inactiveColor = "#000000"
+}
