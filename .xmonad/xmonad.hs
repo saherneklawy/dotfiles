@@ -8,7 +8,7 @@ import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.SetWMName
-import XMonad.Layout.Fullscreen
+-- import XMonad.Layout.Fullscreen
 import XMonad.Layout.NoBorders
 import XMonad.Layout.Spiral
 import XMonad.Layout.Tabbed
@@ -20,6 +20,8 @@ import qualified XMonad.StackSet as W
 
 -- Data.List provides isPrefixOf isSuffixOf and isInfixOf
 import Data.List
+
+import XMonad.Hooks.EwmhDesktops
 
 -- The main function.
 main = xmonad =<< statusBar myBar myPP toggleStrutsKey myConfig
@@ -43,6 +45,7 @@ myConfig = gnomeConfig
     , focusFollowsMouse  = myFocusFollowsMouse
     , layoutHook         = smartBorders $ myLayout
     , manageHook         = myManageHook
+    , handleEventHook    = fullscreenEventHook
     }
 
 -- yes, these are functions; just very simple ones
