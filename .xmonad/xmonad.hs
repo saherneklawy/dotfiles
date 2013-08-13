@@ -175,9 +175,14 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 -- lifting the ~? function to use inside ManagedHooks
 q ~? x = fmap (x `isInfixOf`) q
 
+(=!) :: Eq a => Query a -> a -> Query Bool
+q =! x = fmap (/= x) q
+
+role = stringProperty "WM_WINDOW_ROLE"
+
 myManageHook = composeAll
       [ resource ~? "/tmp/.org.chromium.Chromium"  --> (doShift "9" <+> doFullFloat)
-      , className =? "Google-chrome"               --> doShift "1:web"
+      , className =? "Google-chrome" <&&> role =! "pop-up" --> doShift "1:web"
       , className =? "Rhythmbox"                   --> doShift "8"
       , className =? "Pidgin"                      --> doShift "8" ]
     --, resource  =? "desktop_window" --> doIgnore
