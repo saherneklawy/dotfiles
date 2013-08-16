@@ -184,6 +184,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 --
 -- see http://xmonad.org/xmonad-docs/xmonad-contrib/XMonad-Doc-Extending.html#g:15 for more
 --
+-- http://xmonad.org/xmonad-docs/xmonad-contrib/XMonad-Hooks-ManageHelpers.html
 
 -- lifting the ~? function to use inside ManagedHooks
 q ~? x = fmap (x `isInfixOf`) q
@@ -194,13 +195,13 @@ q =! x = fmap (/= x) q
 role = stringProperty "WM_WINDOW_ROLE"
 
 
-myManageHook = composeAll
-      [ resource ~? "/tmp/.org.chromium.Chromium"  --> (doShift "9" <+> doFullFloat)
-      , className =? "Google-chrome" <&&> role =! "pop-up" --> doShift "1:web"
-      , className =? "Rhythmbox"                   --> doShift "8"
-      , className =? "Pidgin"                      --> doShift "8"
-      , title =? "mongod - server"                 --> viewShift "6:srvs"
-      , title =? "elasticsearch - server"          --> viewShift "6:srvs" ]
+myManageHook = composeOne [ isFullscreen -?> doFullFloat
+      , resource ~? "/tmp/.org.chromium.Chromium"  -?> (doShift "9" <+> doFullFloat)
+      , className =? "Google-chrome" <&&> role =! "pop-up" -?> doShift "1:web"
+      , className =? "Rhythmbox"                   -?> doShift "8"
+      , className =? "Pidgin"                      -?> doShift "8"
+      , title =? "mongod - server"                 -?> viewShift "6:srvs"
+      , title =? "elasticsearch - server"          -?> viewShift "6:srvs" ]
     where viewShift = doF . liftM2 (.) W.greedyView W.shift
     --, resource  =? "desktop_window" --> doIgnore
     --, className =? "Galculator"     --> doFloat
