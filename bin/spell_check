@@ -1,0 +1,20 @@
+#!/bin/bash
+
+#alias dmenu="dmenu -fn 'Droid Sans Mono-9'"
+#DMENUE_CONFIG="-fn '-*-terminus-*-r-normal-*-*-120-*-*-*-*-iso8859-*' -nb '#000000' -nf '#FFFFFF' -sb '#0066ff'"
+DMENU_CONFIG="-nb #000000 -nf #FFFFFF -fn -*-simsun-medium-r-normal-*-16-*-*-*-*-*-iso10646-1"
+
+word=$(echo "" | dmenu $DMENU_CONFIG -p "check a word")
+
+if [ $word ]
+then
+    raw_result=$(printf "$word" | aspell -a | grep -o -P "(\w+,).+" | sed -r "s/, /\n/g")
+    if [ ! $raw_result ]
+    then
+        raw_result=$word
+        correct_state="no error"
+    else
+        correct_state="fixes for"
+    fi
+    anamnesis -a "$(printf "$raw_result" | dmenu $DMENU_CONFIG -p "$correct_state ($word)")"
+fi

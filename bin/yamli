@@ -1,0 +1,29 @@
+#!/bin/bash
+
+DMENU_CONFIG="-nb #000000 -nf #FFFFFF -fn -*-simsun-medium-r-normal-*-16-*-*-*-*-*-iso10646-1"
+
+function yamli_f {
+    WORD=$1
+    API_URL="http://api.yamli.com/transliterate.ashx?word=$WORD&tool=api&account_id=000006&prot=http%3A&hostname=www.yamli.com&path=%2Feditor%2Far%2F&build=5447"
+    result=$(curl $API_URL 2> /dev/null)
+    echo $WORD
+    echo $result | sed -r "s/\{\"r\":\"(.*?)\",\"se.*/\1/" | sed -r "s/\|/\n/g" | awk '{split($0, a, "\\"); print a[1]}'
+}
+
+export -f yamli_f
+
+current=$(echo "" | dmenu $DMENU_CONFIG -p "transliterate 1 word at a time")
+result=""
+
+while [ $current ]
+do
+    temp=$(yamli_f $current | dmenu $DMENU_CONFIG)
+    if [ $temp ]
+    then
+        result="$result $temp"
+    fi
+    current=$(echo "" | dmenu $DMENU_CONFIG -p "transliterate 1 word at a time ($result)")
+done
+
+# place result in clipboard
+anamnesis -a "$result"
