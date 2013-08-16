@@ -23,6 +23,8 @@ import Data.List
 
 import XMonad.Hooks.EwmhDesktops
 
+import Control.Monad (liftM2)
+
 -- The main function.
 main = xmonad =<< statusBar myBar myPP toggleStrutsKey myConfig
 
@@ -180,11 +182,15 @@ q =! x = fmap (/= x) q
 
 role = stringProperty "WM_WINDOW_ROLE"
 
+
 myManageHook = composeAll
       [ resource ~? "/tmp/.org.chromium.Chromium"  --> (doShift "9" <+> doFullFloat)
       , className =? "Google-chrome" <&&> role =! "pop-up" --> doShift "1:web"
       , className =? "Rhythmbox"                   --> doShift "8"
-      , className =? "Pidgin"                      --> doShift "8" ]
+      , className =? "Pidgin"                      --> doShift "8"
+      , title =? "mongod - server"                 --> viewShift "6:srvs"
+      , title =? "elasticsearch - server"          --> viewShift "6:srvs" ]
+    where viewShift = doF . liftM2 (.) W.greedyView W.shift
     --, resource  =? "desktop_window" --> doIgnore
     --, className =? "Galculator"     --> doFloat
     --, className =? "Steam"          --> doFloat
