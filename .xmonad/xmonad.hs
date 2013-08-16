@@ -5,6 +5,8 @@ import Data.Monoid
 import System.Exit
 import XMonad.Hooks.DynamicLog
 
+import XMonad.Actions.UpdatePointer
+
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.SetWMName
@@ -44,7 +46,8 @@ myConfig = gnomeConfig
     , borderWidth = myBorderWidth
     , workspaces  = myWorkspaces
     , keys        = myKeys
-    , focusFollowsMouse  = myFocusFollowsMouse
+    --, focusFollowsMouse  = myFocusFollowsMouse
+    , logHook = updatePointer (Relative 0.5 0.5)
     , layoutHook         = smartBorders $ myLayout
     , manageHook         = myManageHook
     , handleEventHook    = fullscreenEventHook
