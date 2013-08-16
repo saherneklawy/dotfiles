@@ -70,10 +70,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     [ ((modm .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf)
 
     -- launch dmenu
-    , ((modm,               xK_p     ), spawn "dmenu_path_c| yeganesh -- -fn '-*-terminus-*-r-normal-*-*-120-*-*-*-*-iso8859-*' -nb '#000000' -nf '#FFFFFF' -sb '#0066ff' | ${SHELL:-'/bin/sh'} &")
-
-    -- launch gmrun
-    , ((modm .|. shiftMask, xK_p     ), spawn "gmrun")
+    , ((modm,               xK_p     ), spawn "/usr/bin/bash -l -i -c 'dmenu_run'")
+    , ((modm,               xK_s     ), spawn "/usr/bin/bash -l -i -c 'spell_check'")
 
     -- close focused window
     , ((modm .|. shiftMask, xK_c     ), kill)
