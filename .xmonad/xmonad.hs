@@ -212,9 +212,9 @@ myManageHook = composeAll
 myLayout = avoidStruts (
     Tall 1 (3/100) (1/2) |||
     Mirror (Tall 1 (3/100) (1/2)) |||
+    Full |||
     tabbed shrinkText tabConfig |||
-    spiral (6/7)) |||
-    Full -- |||
+    spiral (6/7)) -- |||
     -- Named "FullScreen" (noBorders (fullscreenFull Full))
 
 -- Colors for text and backgrounds of each tab when in "Tabbed" layout.
