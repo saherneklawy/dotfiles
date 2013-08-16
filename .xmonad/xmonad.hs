@@ -6,6 +6,7 @@ import System.Exit
 import XMonad.Hooks.DynamicLog
 
 import XMonad.Actions.UpdatePointer
+import XMonad.Actions.CycleWS
 
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
@@ -58,7 +59,7 @@ myConfig = gnomeConfig
 myTerminal    = "gnome-terminal"
 myModMask     = mod4Mask -- Win key or Super_L
 myBorderWidth = 1
-myWorkspaces    = ["1:web","2:code","3:terms","4", "5", "6:srvs", "7", "8", "9"]
+myWorkspaces    = ["1:web","2:code","3:terms","4", "5", "6:srvs", "7", "8", "9"] ++ map show [10..22]
 
 -- Whether focus follows the mouse pointer.
 myFocusFollowsMouse :: Bool
@@ -141,12 +142,21 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     ]
     ++
 
+    [
+    -- Move to next workspace
+      ((modm,               xK_Left  ), moveTo Prev NonEmptyWS)
+    , ((modm .|. shiftMask, xK_Left  ), moveTo Prev EmptyWS)
+    , ((modm,               xK_Right ), moveTo Next NonEmptyWS)
+    , ((modm .|. shiftMask, xK_Right ), moveTo Next EmptyWS)
+    ]
+    ++
+
     --
     -- mod-[1..9], Switch to workspace N
     -- mod-shift-[1..9], Move client to workspace N
     --
     [((m .|. modm, k), windows $ f i)
-        | (i, k) <- zip (XMonad.workspaces conf) [xK_1 .. xK_9]
+        | (i, k) <- zip (XMonad.workspaces conf) ([xK_1 .. xK_9] ++ [xK_0] ++ [xK_F1 .. xK_F12])
         , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]]
     ++
 
