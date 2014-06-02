@@ -7,7 +7,7 @@ function yamli_f {
     API_URL="http://api.yamli.com/transliterate.ashx?word=$WORD&tool=api&account_id=000006&prot=http%3A&hostname=www.yamli.com&path=%2Feditor%2Far%2F&build=5447"
     result=$(curl $API_URL 2> /dev/null)
     echo $WORD
-    echo $result | sed -r "s/\{\"r\":\"(.*?)\",\"se.*/\1/" | sed -r "s/\|/\n/g" | awk '{split($0, a, "\\"); print a[1]}'
+    echo $result | sed -r "s/\{\"r\":\"(.*?)\",\"se.*/\1/" | sed -r "s/\|/\n/g" | awk '{split($0, a, "\\"); print a[1] }'
 }
 
 export -f yamli_f
@@ -27,3 +27,6 @@ done
 
 # place result in clipboard
 anamnesis -a "$result"
+
+
+

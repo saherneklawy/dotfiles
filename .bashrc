@@ -34,16 +34,17 @@ if [ -f /etc/bash_completion ]; then
 fi
 source /usr/share/git/completion/git-completion.bash
 
-alias grep='grep --color -P'
+#alias grep='grep --color -P'
+alias grep='grep --color'
 alias grepr='grep -r'
 
-alias dmenu="yeganesh -- -fn '-*-terminus-*-r-normal-*-*-120-*-*-*-*-iso8859-*' -nb '#000000' -nf '#FFFFFF' -sb '#0066ff'"
+#alias dmenu="yeganesh -- -fn '-*-terminus-*-r-normal-*-*-120-*-*-*-*-iso8859-*' -nb '#000000' -nf '#FFFFFF' -sb '#0066ff'"
 
-#export AWS_AUTO_SCALING_HOME=/home/saher/amazon-ec2/AutoScaling-1.0.61.1
-#export AWS_CREDENTIAL_FILE=/home/saher/.ec2/default-credentials
-#export AWS_CLOUDWATCH_HOME=/home/saher/amazon-ec2/CloudWatch-1.0.13.4
-#PATH=$PATH:/home/saher/amazon-ec2/AutoScaling-1.0.61.1/bin
-#PATH=$PATH:/home/saher/amazon-ec2/CloudWatch-1.0.13.4/bin
+export AWS_AUTO_SCALING_HOME=/home/saher/amazon-ec2/AutoScaling-1.0.61.1
+export AWS_CREDENTIAL_FILE=/home/saher/.ec2/default-credentials
+export AWS_CLOUDWATCH_HOME=/home/saher/amazon-ec2/CloudWatch-1.0.13.4
+PATH=$PATH:/home/saher/amazon-ec2/AutoScaling-1.0.61.1/bin
+PATH=$PATH:/home/saher/amazon-ec2/CloudWatch-1.0.13.4/bin
 
 source ~/.rake_cap_bash_autocomplete.sh
 
@@ -52,3 +53,9 @@ export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 export PATH=$PATH:~/.cabal/bin:~/.xmonad/bin
 export PATH="$HOME/bin:$PATH"
+
+# The next line updates PATH for the Google Cloud SDK.
+source /home/saher/google-cloud-sdk/path.bash.inc
+
+# The next line enables bash completion for gcloud.
+source /home/saher/google-cloud-sdk/completion.bash.inc

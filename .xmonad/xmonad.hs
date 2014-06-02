@@ -47,7 +47,7 @@ myConfig = gnomeConfig
     , borderWidth = myBorderWidth
     , workspaces  = myWorkspaces
     , keys        = myKeys
-    --, focusFollowsMouse  = myFocusFollowsMouse
+    -- , focusFollowsMouse  = myFocusFollowsMouse
     , logHook = updatePointer (Relative 0.5 0.5)
     , layoutHook         = smartBorders $ myLayout
     , manageHook         = myManageHook
@@ -198,8 +198,8 @@ role = stringProperty "WM_WINDOW_ROLE"
 myManageHook = composeOne [ isFullscreen -?> doFullFloat
       , resource ~? "/tmp/.org.chromium.Chromium"  -?> (doShift "9" <+> doFullFloat)
       , className =? "Google-chrome" <&&> role =! "pop-up" -?> doShift "1:web"
-      , className =? "Rhythmbox"                   -?> doShift "8"
       , className =? "Pidgin"                      -?> doShift "8"
+      , className =? "Xchat"                      -?> doShift "8"
       , title =? "mongod - server"                 -?> viewShift "6:srvs"
       , title =? "elasticsearch - server"          -?> viewShift "6:srvs" ]
     where viewShift = doF . liftM2 (.) W.greedyView W.shift
