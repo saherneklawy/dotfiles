@@ -1,0 +1,4 @@
+#!/bin/bash
+
+gnome-terminal -t "mongod - server" --class="mongod" -e "run_mongod" &
+gnome-terminal -t "elasticsearch - server" --class="elasticsearch" -e "run_elasticsearch" &

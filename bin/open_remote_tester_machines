@@ -1,0 +1,5 @@
+#!/bin/bash
+
+gnome-terminal -t "trustious tester 1" --class="tr-tester" -e "ssh -t -t -C -A trustious@stager.trustious.com" &
+gnome-terminal -t "trustious tester 2" --class="tr-tester" -e "ssh -t -t -C -A trustious@stager.trustious.com \"ssh -C -A trustious@trustious-tester-2\"" &
+gnome-terminal -t "trustious tester 3" --class="tr-tester" -e "ssh -t -t -C -A trustious@stager.trustious.com \"ssh -C -A trustious@trustious-tester-3\"" &

@@ -1,0 +1,3 @@
+#!/bin/bash
+
+sudo mongod --config /etc/mongodb.conf --logpath /dev/stdout
