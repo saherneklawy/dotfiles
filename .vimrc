@@ -55,6 +55,8 @@ noremap <Left> 10zh
 noremap <Up> 10<C-y>
 noremap <Down> 10<C-e>
 
+nnoremap // :noh<cr>
+
 " spell checker
 "set spell
 
