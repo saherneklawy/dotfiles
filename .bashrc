@@ -47,6 +47,7 @@ PATH=$PATH:/home/saher/amazon-ec2/AutoScaling-1.0.61.1/bin
 PATH=$PATH:/home/saher/amazon-ec2/CloudWatch-1.0.13.4/bin
 
 source ~/.rake_cap_bash_autocomplete.sh
+source ~/.wraith_bash_autocomplete.sh
 
 
 export PATH="$HOME/.rbenv/bin:$PATH"
