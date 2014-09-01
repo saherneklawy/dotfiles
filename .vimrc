@@ -9,6 +9,7 @@ set autoindent
 
 set hlsearch
 set ignorecase
+set nosol
 
 syntax on
 
@@ -22,6 +23,7 @@ set mouse=a
 
 set wildmenu
 set nowrap
+set virtualedit=block " make selection better not bounded to end of lines
 
 " vundler setup
 set nocompatible               " be iMproved
@@ -36,6 +38,7 @@ Bundle 'gmarik/vundle'
 "
 " original repos on github
 Bundle 'chriskempson/vim-tomorrow-theme'
+Bundle "jonathanfilip/vim-lucius"
 Bundle 'kien/ctrlp.vim'
 Bundle 'aaronbieber/quicktask'
 Bundle 'ervandew/supertab'
@@ -43,10 +46,30 @@ Bundle 'scrooloose/syntastic'
 Bundle 'scrooloose/nerdtree'
 "Bundle 'hallison/vim-markdown'
 Bundle 'plasticboy/vim-markdown'
+Bundle 'godlygeek/tabular'
+Bundle 'tpope/vim-surround'
+"Bundle 'bling/vim-airline'
+Bundle 'yahiaelgamal/vim-airline'
+Bundle 'mileszs/ack.vim'
+Bundle "The-NERD-Commenter"
+Bundle "tpope/vim-rails"
+Bundle 'tpope/vim-fugitive'
 
 filetype plugin indent on     " required!
 
 set t_Co=256           " Tell vim that my terminal has 256 colors
+"set t_AB=\[48;5;%dm
+"set t_AF=\[38;5;%dm
+"set t_AB=^[[48;5;%dm
+"set t_AF=^[[38;5;%dm
+
+colorscheme lucius
+" LuciusLightHighContrast
+LuciusWhiteHighContrast
+
+set colorcolumn=80     " Long lines are evil
+"set cursorline
+"set cursorcolumn
 
 " Horizontal scrolling
 set sidescroll=1 " not affecting zl and zh, affecting cursor motion
@@ -56,6 +79,9 @@ noremap <Up> 10<C-y>
 noremap <Down> 10<C-e>
 
 nnoremap // :noh<cr>
+
+map <C-left> :tabp<CR>
+map <C-right> :tabn<CR>
 
 " spell checker
 "set spell
@@ -118,10 +144,55 @@ let g:syntastic_javascript_checkers = ['gjslint', 'jshint']
 let g:syntastic_html_checkers = ['tidy']
 let g:syntastic_css_checkers = ['csslint']
 
+"let g:SuperTabDefaultCompletionType = "context"
+
+let g:syntastic_mode_map = { 'mode': 'passive',
+                           \ 'active_filetypes': [],
+                           \ 'passive_filetypes': [] }
 
 
 au BufRead,BufNewFile *.rabl setfiletype ruby
 au BufRead,BufNewFile *.angular setfiletype html
 
-command Wsudo write !sudo tee %
+command! Wsudo write !sudo tee %
 cabbrev wsudo Wsudo
+
+command! Bda 1,500bdelete
+cabbrev bda Bda
+
+command! Adiff windo diffthis
+cabbrev adiff Adiff
+
+command! Adiffoff windo diffoff
+cabbrev adiffoff Adiffoff
+
+" Comment using NERDCommneter
+map <C-l> <leader>c<Space>
+
+set laststatus=2
+" Statusline
+set statusline=%F%m%r%h%w[%L][%{&ff}]%y%{fugitive#statusline()}[%p%%][%04l,%04v]
+"              | | | | |  |   |      | |                        |     |    |
+"              | | | | |  |   |      | |                        |     |    + current
+"              | | | | |  |   |      | |                        |     |       column
+"              | | | | |  |   |      | |                        |     +-- current line
+"              | | | | |  |   |      | |                        +-- current % into file
+"              | | | | |  |   |      | +-- current Branch in square brackets
+"              | | | | |  |   |      +-- current syntax in
+"              | | | | |  |   |          square brackets
+"              | | | | |  |   +-- current fileformat
+"              | | | | |  +-- number of lines
+"              | | | | +-- preview flag in square brackets
+"              | | | +-- help flag in square brackets
+"              | | +-- readonly flag in square brackets
+"              | +-- modified flag in square brackets
+"              +-- full path to file in the buffer
+
+" airline config
+let g:airline_left_sep=''
+let g:airline_right_sep=''
+let g:airline_theme='tomorrow'
+let g:airline_branch_prefix = '⎇ '
+let g:airline_section_a = '%n %t'
+let g:airline_section_y = ''
+let g:airline_section_z = '%p%%:%l:%c'
