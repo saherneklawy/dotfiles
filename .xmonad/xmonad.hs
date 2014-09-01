@@ -196,7 +196,7 @@ role = stringProperty "WM_WINDOW_ROLE"
 
 
 myManageHook = composeOne [ isFullscreen -?> doFullFloat
-      , resource ~? "/tmp/.org.chromium.Chromium"  -?> (doShift "9" <+> doFullFloat)
+      , resource ~? "/tmp/.com.google.Chrome."  -?> (doShift "9" <+> doFullFloat)
       , className =? "Google-chrome" <&&> role =! "pop-up" -?> doShift "1:web"
       , className =? "Pidgin"                      -?> doShift "8"
       , className =? "Xchat"                      -?> doShift "8"
