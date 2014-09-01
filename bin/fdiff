@@ -1,0 +1,5 @@
+#!/bin/bash
+max_width=$(cat $1 $2 | wc -L)
+diff <(cat $1 | sort) <(cat $2 | sort) -y -W $(($max_width*2)) | grep "<" | cut -d "<" -f 1 | sed 's/\s*$//'
+#-W $(($max_width*2+4))
+# | awk '{print $1}'
