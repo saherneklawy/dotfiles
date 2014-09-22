@@ -54,6 +54,7 @@ Bundle 'mileszs/ack.vim'
 Bundle "The-NERD-Commenter"
 Bundle "tpope/vim-rails"
 Bundle 'tpope/vim-fugitive'
+Bundle 'bkad/CamelCaseMotion'
 
 filetype plugin indent on     " required!
 
