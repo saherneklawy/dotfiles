@@ -23,11 +23,11 @@
     showw = show --color-words='\\w+|[^[:space:]]'
     log-compact = log --oneline --decorate
     # list branches sorted by last modified
-    b = "!git for-each-ref --sort='-authordate' --format=\"%(authordate)%09%(objectname:short)%09   %(refname)\" refs/heads | sed -e 's-refs/heads/--' | sed \"s/\\(.*\\)  \\($(git rev-parse --abbrev-ref HEAD)\\)\\(.*\\)/$(echo -e \"\\033[32m\")\\1* \\2\\3$(echo -e \"\\033[0m\")/\""
+    b = "!git for-each-ref --sort='-authordate' --format=\"%(authordate)%09%(objectname:short)%09   %(refname)\" refs/heads | sed -e 's-refs/heads/--' | sed \"s/\\(.*\\)  \\($(git rev-parse --abbrev-ref HEAD)\\)\\(.*\\)/$(echo -e \"\\e[32m\")\\1* \\2\\3$(echo -e \"\\e[0m\")/\""
     # one-line log
     l = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
     # list aliases
-    la = "!git config -l | grep alias | cut -c 7-"
+    la = "!git config -l | grep alias | cut -c 7-$(tput cols) | sed \"s/\\(^[^=]*\\)=/$(echo -e \"\\e[1m\\e[34m\")\\1$(echo -e \"\\e[0m\")=/\""
     # http://stackoverflow.com/questions/1419623/how-to-list-branches-that-contain-a-given-commit
     contains = branch -r --contains
 [core]
