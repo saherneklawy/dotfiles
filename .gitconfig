@@ -13,10 +13,14 @@
     co = checkout
     d = diff
     dc = diff --cached
+    ds = diff --stat
     #http://stackoverflow.com/questions/8483041/git-color-words-excluding
     dw = diff --color-words='\\w+|[^[:space:]]'
+    dwc = diff --cached --color-words='\\w+|[^[:space:]]'
     dcw = diff --cached --color-words='\\w+|[^[:space:]]'
     lg = log -p
+    lgw = log -p --color-words='\\w+|[^[:space:]]'
+    showw = show --color-words='\\w+|[^[:space:]]'
     log-compact = log --oneline --decorate
     # list branches sorted by last modified
     b = "!git for-each-ref --sort='-authordate' --format=\"%(authordate)%09%(objectname:short)%09   %(refname)\" refs/heads | sed -e 's-refs/heads/--' | sed \"s/\\(.*\\)  \\($(git rev-parse --abbrev-ref HEAD)\\)\\(.*\\)/$(echo -e \"\\033[32m\")\\1* \\2\\3$(echo -e \"\\033[0m\")/\""
@@ -24,6 +28,8 @@
     l = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
     # list aliases
     la = "!git config -l | grep alias | cut -c 7-"
+    # http://stackoverflow.com/questions/1419623/how-to-list-branches-that-contain-a-given-commit
+    contains = branch -r --contains
 [core]
 	editor = vim
 [push]
