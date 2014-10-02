@@ -135,8 +135,11 @@ endif
 " set runtimepath^=~/.vim/bundle/ctrlp.vim
 
 let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_extensions = ['tag', 'line', 'mixed']
+let g:ctrlp_use_caching = 1
+let g:ctrlp_clear_cache_on_exit = 0
 
-set wildignore+=*.o,*.obj,.git,.bundle,*tmp/**,*app/assets/images/**,*.png,*.jpg,*.jpeg,*.gif,*.swp,*.swo,*.swn,*bin/**
+set wildignore+=*.o,*.obj,.git,.bundle,*tmp/**,*app/assets/images/**,*public/cache/**,*public/mobile_cache/**,*.png,*.jpg,*.jpeg,*.gif,*.swp,*.swo,*.swn,*bin/**,tags
 
 let g:syntastic_ruby_checkers = ['mri', 'rubocop']
 let g:syntastic_ruby_rubocop_args = "-R"
