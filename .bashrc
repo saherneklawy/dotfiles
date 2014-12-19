@@ -6,7 +6,6 @@
 [[ $- != *i* ]] && return
 
 alias ls='ls --color=auto'
-PS1='[\u@\h \W]\$ '
 
 
 # enable color support of ls and also add handy aliases
@@ -33,6 +32,41 @@ if [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
 fi
 source /usr/share/git/completion/git-completion.bash
+source /usr/share/git/completion/git-prompt.sh
+
+#PS1='[\u:\w$(__git_ps1 " (%s)")]\$ '
+#PS1='[\u@\h \W]\$ '
+
+__git_relative_path ()
+{
+  if [ "$PWD" == "$HOME" ]
+  then
+    echo "~"
+  else
+    if [ "$PWD" == '/' ]
+    then
+      echo "/"
+    else
+      TMP1=$(git rev-parse --show-toplevel)
+      if [ "$TMP1" == "$HOME" ]
+      then
+        TMP1='~'
+      fi
+      TMP2="/$(git rev-parse --show-prefix)"
+      echo "${TMP1##*/}${TMP2%\/}"
+    fi
+  fi
+}
+__custom_git_PS1 () {
+  if ! git rev-parse 2> /dev/null; then
+    echo "$PWD"
+  else
+    echo "$(__git_relative_path)⎇ $(__git_ps1 "%s")"
+  fi
+}
+export -f __git_relative_path
+export -f __custom_git_PS1
+PS1='$(__custom_git_PS1)$ '
 
 #alias grep='grep --color -P'
 alias grep='grep --color'
