@@ -57,16 +57,23 @@ __git_relative_path ()
     fi
   fi
 }
-__custom_git_PS1 () {
+__ps1_path () {
   if ! git rev-parse 2> /dev/null; then
-    echo "$PWD"
+    echo -n "$PWD"
   else
-    echo "$(__git_relative_path)⎇ $(__git_ps1 "%s")"
+    echo -e -n "$(__git_relative_path)⎇ "
   fi
 }
+__custom_git_PS1 () {
+  if git rev-parse 2> /dev/null; then
+    echo -e -n "$(__git_ps1 "%s")"
+  fi
+}
+
 export -f __git_relative_path
 export -f __custom_git_PS1
-PS1='$(__custom_git_PS1)$ '
+export -f __ps1_path
+PS1='$(__ps1_path)\[\e[1;103m\]$(__custom_git_PS1)\[\e[m\]$ '
 
 #alias grep='grep --color -P'
 alias grep='grep --color'
@@ -96,3 +103,8 @@ source /home/saher/google-cloud-sdk/path.bash.inc
 
 # The next line enables bash completion for gcloud.
 source /home/saher/google-cloud-sdk/completion.bash.inc
+if [ "$TERM" == "xterm" ]; then
+    # No it isn't, it's gnome-terminal
+    export TERM=xterm-256color
+fi
+shopt -s checkwinsize
