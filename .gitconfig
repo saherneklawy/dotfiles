@@ -22,15 +22,23 @@
     lgw = log -p --color-words='\\w+|[^[:space:]]'
     showw = show --color-words='\\w+|[^[:space:]]'
     log-compact = log --oneline --decorate
+    ls = log --stat
     # list branches sorted by last modified
-    b = "!git for-each-ref --sort='-authordate' --format=\"%(authordate)%09%(objectname:short)%09   %(refname)\" refs/heads | sed -e 's-refs/heads/--' | sed \"s/\\(.*\\)  \\($(git rev-parse --abbrev-ref HEAD)\\)\\(.*\\)/$(echo -e \"\\e[32m\")\\1* \\2\\3$(echo -e \"\\e[0m\")/\""
+    b = "!git for-each-ref --sort='authordate' --format=\"%(authordate)%09%(objectname:short)%09   %(refname)\" refs/heads | sed -e 's-refs/heads/--' | sed \"s/\\(.*\\)  \\($(git rev-parse --abbrev-ref HEAD)\\)$/$(echo -e \"\\e[32m\")\\1* \\2$(echo -e \"\\e[0m\")/\""
     # one-line log
     l = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
+    # show commit diff with master
+    lb = "!git l $1...HEAD --no-merges"
+    lbm = "!git lb upstream/master"
     # list aliases
     la = "!git config -l | grep alias | cut -c 7-$(tput cols) | sed \"s/\\(^[^=]*\\)=/$(echo -e \"\\e[1m\\e[34m\")\\1$(echo -e \"\\e[0m\")=/\""
     # http://stackoverflow.com/questions/1419623/how-to-list-branches-that-contain-a-given-commit
     contains = branch -r --contains
+    root = rev-parse --show-toplevel
+    deleted = log --diff-filter=D --summary
 [core]
 	editor = vim
 [push]
 	default = simple
+#http://blog.kablamo.org/2013/12/08/git-restore/
+#git branch --set-upstream-to=upstream/master master
