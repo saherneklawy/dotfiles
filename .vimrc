@@ -78,6 +78,9 @@ LuciusWhiteHighContrast
 set colorcolumn=80     " Long lines are evil
 "set cursorline
 "set cursorcolumn
+"http://vim.wikia.com/wiki/Automatic_word_wrapping
+"set tw=80
+"set formatoptions+=t
 
 " Horizontal scrolling
 set sidescroll=1 " not affecting zl and zh, affecting cursor motion
@@ -90,6 +93,8 @@ nnoremap // :noh<cr>
 
 map <C-left> :tabp<CR>
 map <C-right> :tabn<CR>
+map <C-up> :bp<CR>
+map <C-down> :bn<CR>
 
 " spell checker
 "set spell
@@ -146,7 +151,10 @@ let g:ctrlp_extensions = ['tag', 'line', 'mixed']
 let g:ctrlp_use_caching = 1
 let g:ctrlp_clear_cache_on_exit = 0
 
-set wildignore+=*.o,*.obj,.git,.bundle,*tmp/**,*app/assets/images/**,*public/cache/**,*public/mobile_cache/**,*.png,*.jpg,*.jpeg,*.gif,*.swp,*.swo,*.swn,*bin/**,tags
+set wildignore+=*.o,*.obj,.git,.bundle,*tmp/**,*app/build/**,*data/**
+set wildignore+=*app/assets/images/**,*public/cache/**,*public/mobile_cache/**
+set wildignore+=*.png,*.jpg,*.jpeg,*.gif,*.swp,*.swo,*.swn
+set wildignore+=*bin/**,*node_modules/**
 
 let g:syntastic_ruby_checkers = ['mri', 'rubocop']
 let g:syntastic_ruby_rubocop_args = "-R"
@@ -177,8 +185,19 @@ cabbrev adiff Adiff
 command! Adiffoff windo diffoff
 cabbrev adiffoff Adiffoff
 
+command! -range Bash <line1>,<line2>w !bash
+cabbrev bash Bash
+
+nnoremap ,cd :cd %:p:h<CR>:pwd<CR>
+" CDC = Change to Directory of Current file
+command CDC cd %:p:h
+cabbrev cdc CDC
+
 " Comment using NERDCommneter
 map <C-l> <leader>c<Space>
+
+nnoremap <C-\> :NERDTreeToggle<CR>
+nnoremap \\ :NERDTreeFind<CR>
 
 set laststatus=2
 " Statusline
@@ -207,3 +226,10 @@ let g:airline_branch_prefix = '⎇ '
 let g:airline_section_a = '%n %t'
 let g:airline_section_y = ''
 let g:airline_section_z = '%p%%:%l:%c'
+
+"http://vim.wikia.com/wiki/Encryption
+setlocal cm=blowfish
+
+let r_syntax_folding = 1
+set nofoldenable
+let vimrplugin_assign = 0 " make underscore not convert to ->
