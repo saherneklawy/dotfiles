@@ -48,9 +48,8 @@ Bundle 'aaronbieber/quicktask'
 Bundle 'ervandew/supertab'
 Bundle 'scrooloose/syntastic'
 Bundle 'scrooloose/nerdtree'
-"Bundle 'hallison/vim-markdown'
-Bundle 'plasticboy/vim-markdown'
 Bundle 'godlygeek/tabular'
+Bundle 'plasticboy/vim-markdown'
 Bundle 'tpope/vim-surround'
 "Bundle 'bling/vim-airline'
 Bundle 'yahiaelgamal/vim-airline'
@@ -59,6 +58,10 @@ Bundle "The-NERD-Commenter"
 Bundle "tpope/vim-rails"
 Bundle 'tpope/vim-fugitive'
 Bundle 'bkad/CamelCaseMotion'
+Bundle 'vim-scripts/Vim-R-plugin'
+Bundle 'editorconfig/editorconfig-vim'
+Bundle 'mattn/emmet-vim'
+Bundle 'digitaltoad/vim-jade'
 
 filetype plugin indent on     " required!
 
