@@ -16,6 +16,10 @@ syntax on
 " tab stop set to 4 spaces
 set ts=2
 set shiftwidth=2
+if &filetype=='javascript'
+  set ts=4
+  set shiftwidth=4
+endif
 " replace tabs with spaces
 set expandtab
 
