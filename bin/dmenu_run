@@ -2,5 +2,6 @@
 
 DMENU_CONFIG="-nb #000000 -nf #FFFFFF -fn -*-simsun-medium-r-normal-*-16-*-*-*-*-*-iso10646-1"
 # -fn '-*-terminus-*-r-normal-*-*-120-*-*-*-*-iso8859-*' -nb '#000000' -nf '#FFFFFF' -sb '#0066ff'
-dmenu_path_c| yeganesh -- $DMENU_CONFIG | ${SHELL:-'/usr/bin/bash -i'} &
+#dmenu_path_c| yeganesh -- $DMENU_CONFIG | ${SHELL:-'/usr/bin/bash -i'} &
+dmenu_path | yeganesh -- $DMENU_CONFIG | ${SHELL:-'/usr/bin/bash -i'} &
 

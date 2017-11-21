@@ -26,7 +26,8 @@ do
 done
 
 # place result in clipboard
-anamnesis -a "$result"
+#anamnesis -a "$result"
+echo $result | xclip -i
 
 
 

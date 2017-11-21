@@ -27,5 +27,9 @@ function screensaver-on {
   xset +dpms
 }
 
+function switch-kops {
+  kops export kubecfg --name $NAME --state $KOPS_STATE_STORE
+}
+
 export -f open-modified
 export -f long-phantom

@@ -62,6 +62,8 @@ Bundle 'vim-scripts/Vim-R-plugin'
 Bundle 'editorconfig/editorconfig-vim'
 Bundle 'mattn/emmet-vim'
 Bundle 'digitaltoad/vim-jade'
+Bundle 'fatih/vim-go'
+Bundle 'kchmck/vim-coffee-script'
 
 filetype plugin indent on     " required!
 
@@ -155,6 +157,9 @@ set wildignore+=*.o,*.obj,.git,.bundle,*tmp/**,*app/build/**,*data/**
 set wildignore+=*app/assets/images/**,*public/cache/**,*public/mobile_cache/**
 set wildignore+=*.png,*.jpg,*.jpeg,*.gif,*.swp,*.swo,*.swn
 set wildignore+=*bin/**,*node_modules/**
+set wildignore+=*build/**
+set wildignore+=*bower_components/**
+set wildignore+=*.class
 
 let g:syntastic_ruby_checkers = ['mri', 'rubocop']
 let g:syntastic_ruby_rubocop_args = "-R"
@@ -233,3 +238,19 @@ setlocal cm=blowfish
 let r_syntax_folding = 1
 set nofoldenable
 let vimrplugin_assign = 0 " make underscore not convert to ->
+
+let g:go_fmt_command = "goimports"
+let g:go_fmt_fail_silently = 0
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_interfaces = 1
+let g:go_auto_type_info = 0
+
+
+if &filetype=='go'
+  set noexpandtab
+  echo "hi"
+endif
+
+set relativenumber

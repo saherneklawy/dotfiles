@@ -47,16 +47,21 @@ myConfig = gnomeConfig
     , borderWidth = myBorderWidth
     , workspaces  = myWorkspaces
     , keys        = myKeys
-    -- , focusFollowsMouse  = myFocusFollowsMouse
-    , logHook = updatePointer (Relative 0.5 0.5)
+    {-, focusFollowsMouse  = myFocusFollowsMouse-}
+    {-new syntax for updatePointer https://hackage.haskell.org/package/xmonad-contrib-0.12/docs/XMonad-Actions-UpdatePointer.html-}
+    , logHook = updatePointer (0.5, 0.5) (0, 0)
     , layoutHook         = smartBorders $ myLayout
     , manageHook         = myManageHook
     , handleEventHook    = fullscreenEventHook
+    -- https://bbs.archlinux.org/viewtopic.php?id=95437
+    , startupHook = setWMName "LG3D" 
     }
 
 -- yes, these are functions; just very simple ones
 -- that accept no input and return static values
 myTerminal    = "gnome-terminal"
+{-myTerminal    = "xfce4-terminal"-}
+{-myTerminal    = "xterm"-}
 myModMask     = mod4Mask -- Win key or Super_L
 myBorderWidth = 1
 myWorkspaces    = ["1:web","2:code","3:terms","4", "5", "6:srvs", "7", "8", "9"] ++ map show [10..22]
@@ -74,8 +79,11 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     [ ((modm .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf)
 
     -- launch dmenu
-    , ((modm,               xK_p     ), spawn "/usr/bin/bash -l -i -c 'dmenu_run'")
-    , ((modm,               xK_s     ), spawn "/usr/bin/bash -l -i -c 'spell_check'")
+    , ((modm,               xK_p     ), spawn "/usr/bin/bash -l -i -c '/home/saher/bin/dmenu_run'")
+    , ((modm,               xK_s     ), spawn "/usr/bin/bash -l -i -c '/home/saher/bin/spell_check'")
+    , ((modm,               xK_c     ), spawn "/usr/bin/bash -l -i -c '/home/saher/bin/dmenu_calc'")
+    , ((modm,               xK_a     ), spawn "/usr/bin/bash -l -i -c '/usr/bin/nautilus'")
+
 
     -- close focused window
     , ((modm .|. shiftMask, xK_c     ), kill)
@@ -240,3 +248,4 @@ tabConfig = defaultTheme {
     inactiveTextColor = "#EEEEEE",
     inactiveColor = "#000000"
 }
+

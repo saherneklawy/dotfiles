@@ -15,9 +15,9 @@
     dc = diff --cached
     ds = diff --stat
     #http://stackoverflow.com/questions/8483041/git-color-words-excluding
-    dw = diff --color-words='\\w+|[^[:space:]]'
-    dwc = diff --cached --color-words='\\w+|[^[:space:]]'
-    dcw = diff --cached --color-words='\\w+|[^[:space:]]'
+    dw = diff -w --color-words='\\w+|[^[:space:]]'
+    dwc = diff -w --cached --color-words='\\w+|[^[:space:]]'
+    dcw = diff -w --cached --color-words='\\w+|[^[:space:]]'
     lg = log -p
     lgw = log -p --color-words='\\w+|[^[:space:]]'
     showw = show --color-words='\\w+|[^[:space:]]'
@@ -29,7 +29,7 @@
     l = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
     # show commit diff with master
     lb = "!git l $1...HEAD --no-merges"
-    lbm = "!git lb upstream/master"
+    lbm = "!git lb HEAD upstream/master"
     # list aliases
     la = "!git config -l | grep alias | cut -c 7-$(tput cols) | sed \"s/\\(^[^=]*\\)=/$(echo -e \"\\e[1m\\e[34m\")\\1$(echo -e \"\\e[0m\")=/\""
     # http://stackoverflow.com/questions/1419623/how-to-list-branches-that-contain-a-given-commit
@@ -42,3 +42,5 @@
 	default = simple
 #http://blog.kablamo.org/2013/12/08/git-restore/
 #git branch --set-upstream-to=upstream/master master
+[credential]
+	helper = cache

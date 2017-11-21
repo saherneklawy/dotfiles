@@ -20,6 +20,14 @@ if [ "$TERM" != "dumb" ] && [ -x /usr/bin/dircolors ]; then
     #alias egrep='egrep --color=auto'
 fi
 
+export SSH_AGENT_PID=$(ps -eo pid,command | grep [s]sh-agent | head -n1 | awk '{print $1}')
+if [ ! $SSH_AGENT_PID ]; then
+  eval `ssh-agent -s`
+else
+  export export SSH_AUTH_SOCK=$(find /tmp/ssh-* -iname "agent.$((SSH_AGENT_PID-1))")
+fi
+ssh-add
+
 # some more ls aliases
 alias ll='ls -l'
 alias la='ls -A'
@@ -33,6 +41,7 @@ if [ -f /etc/bash_completion ]; then
 fi
 source /usr/share/git/completion/git-completion.bash
 source /usr/share/git/completion/git-prompt.sh
+#source ~/.bash_profile
 
 #PS1='[\u:\w$(__git_ps1 " (%s)")]\$ '
 #PS1='[\u@\h \W]\$ '
@@ -78,6 +87,7 @@ PS1='$(__ps1_path)\[\e[1;103m\]$(__custom_git_PS1)\[\e[m\]$ '
 #alias grep='grep --color -P'
 alias grep='grep --color'
 alias grepr='grep -r'
+alias less='less -R'
 
 #alias dmenu="yeganesh -- -fn '-*-terminus-*-r-normal-*-*-120-*-*-*-*-iso8859-*' -nb '#000000' -nf '#FFFFFF' -sb '#0066ff'"
 
@@ -99,12 +109,68 @@ export PATH=$PATH:~/.cabal/bin:~/.xmonad/bin
 export PATH="$HOME/bin:$PATH"
 
 # The next line updates PATH for the Google Cloud SDK.
-source /home/saher/google-cloud-sdk/path.bash.inc
+#source /home/saher/google-cloud-sdk/path.bash.inc
 
 # The next line enables bash completion for gcloud.
-source /home/saher/google-cloud-sdk/completion.bash.inc
+#source /home/saher/google-cloud-sdk/completion.bash.inc
+
+export PYTHONSTARTUP=~/.pythonrc
+
 if [ "$TERM" == "xterm" ]; then
     # No it isn't, it's gnome-terminal
     export TERM=xterm-256color
 fi
+
+alias say='echo "$1" | espeak -s 120 2>/dev/null'
+alias pacuar=pacaur
+alias open=xdg-open
+
+alias xradnr=xrandr
+
+export JAVA_HOME=/usr/lib/jvm/default/
+export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel'
+
+alias handbrake=ghb
+alias mkv-tools=mmg
+
 shopt -s checkwinsize
+
+. /etc/profile.d/vte.sh
+
+export DOCKER_HOST="tcp://0.0.0.0:4243"
+export DOCKER_TMPDIR=/mnt/docker/tmp
+export VIMRUNTIME=
+
+export ANDROID_HOME=/mnt/apps/android-sdk-linux/
+export PATH=$PATH:$ANDROID_HOME/tools
+
+alias fig=docker-compose
+alias jdownloader=JDownloader
+
+export SPARK_HOME=/home/saher/workspace/spark/spark-talk/vms
+
+alias ll='ls -lhtr'
+
+export SAL_USE_VCLPLUGIN=gen lowriter
+
+
+shopt -s checkwinsize
+
+#alias cp="rsync -avP"
+alias cp="rsync -a -v --delete --progress --links --stats --human-readable"
+
+
+export PROJECT_DIR=/home/saher/workspace/bulk-whiz
+complete -F _docker_compose fig
+
+export GOPATH=$HOME/workspace/go
+export PATH=$GOPATH/bin:$PATH
+
+#export ANSIBLE_INVENTORY=~/ansible_hosts
+
+export PATH=$PATH:/mnt/apps/carrot2-workbench-3.15.0/
+
+source <(kubectl completion bash) # setup autocomplete in bash, bash-completion package should be installed first.
+source /usr/share/autoenv/activate.sh
+
+export PATH=$PATH:/home/saher/.gem/ruby/2.4.0/bin

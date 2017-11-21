@@ -54,9 +54,13 @@
     m:0x0 + c:107
     Print
 
-"gnome-screenshot -a"
+"gnome-screenshot -a -i"
     m:0x1 + c:107
     Shift + Print
+
+"gnome-screenshot -a -i"
+    m:0x1 + c:107
+    Control + Shift + Print
 
 "gnome-screensaver-command -l"
     m:0xc + c:46
@@ -67,11 +71,11 @@
     XF86Launch1
 
 
-"xbacklight -inc 25"
+"xbacklight -inc 10"
     m:0x0 + c:233
     XF86MonBrightnessUp
 
-"xbacklight -dec 25"
+"xbacklight -dec 10"
     m:0x0 + c:232
     XF86MonBrightnessDown
 
