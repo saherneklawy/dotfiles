@@ -1,0 +1,21 @@
+#/bin/bash
+# Parameters
+# Usage gen_batch DIR_NAME BATCH_FILE_NAME
+#     DIR_NAME - directory containig wav- and text-files
+#     BATCH_FILE_NAME - name of the output file
+
+# This script searches for the wav-files in DIR_NAME directory
+# and prints out the corresponding description from text-files
+TEXT_DIR=$1
+touch $2
+rm -f $2
+echo "Input dir: " $1
+for i in `find ./$TEXT_DIR -name '*.wav'`
+do
+t=`echo $i | sed -e 's\.wav\.text\g'`
+# text=`cat $t`
+echo $i| tr '\n' ' ' >> ${2}
+cat $t | sed -e 's\<s>\\g'| sed -e 's\</s>\\g'>>  ${2}
+echo "" >> ${2}
+done
+echo `find ./$TEXT_DIR -name '*.wav'| wc -l` files were listed in $2

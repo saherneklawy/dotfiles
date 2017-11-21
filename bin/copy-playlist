@@ -1,0 +1,28 @@
+#!/usr/bin/python2
+
+import os
+import sys
+import shutil
+
+from progressbar import ProgressBar
+
+
+import  urlparse
+import urllib
+
+def convert_uri(uri):
+    #p = urlparse.urlparse(uri)
+    #finalPath = os.path.abspath(os.path.join(p.netloc, p.path))
+    #return finalPath
+    return urllib.unquote(uri)[7:]
+
+playlist_file_name = sys.argv[-1]
+
+lines = open(playlist_file_name).read().strip().split("\n")
+files = [l for l in lines if 'File' in l and '=file://' in l]
+
+progress = ProgressBar()
+for f in progress(files):
+    f_path = convert_uri(f.split('=')[-1])
+    shutil.copyfile(f_path, os.path.basename(f_path))
+

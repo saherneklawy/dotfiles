@@ -1,0 +1,15 @@
+#!/bin/bash
+
+DMENU_CONFIG="-nb #000000 -nf #FFFFFF -fn -*-simsun-medium-r-normal-*-16-*-*-*-*-*-iso10646-1"
+
+xsel -o | dmenu $DMENU_CONFIG -p Calculate: | xargs echo | bc 2>&1 | dmenu $DMENU_CONFIG -p Answer: | xsel -i
+
+# run dmenu calculator while the result is not empty
+#while : ; do
+#    # use contents of clipboard as option, pass into bc to be calculated
+#    result=$(xsel -o -b | dmenu -p Calc | xargs echo | bc 2>&1)
+#    if [[ $result ]]; then # if result is empty (the last one), don't copy it to clipboard
+#        printf "$result" | xsel -b
+#    fi
+#    [[ $result ]] || break # if result is empty, break from while loop
+#done

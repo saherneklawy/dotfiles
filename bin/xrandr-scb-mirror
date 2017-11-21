@@ -1,0 +1,5 @@
+xrandr --output LVDS1 --mode 800x600
+xrandr --output VGA1 --mode 800x600
+
+restart_trayer
+screensaver-off

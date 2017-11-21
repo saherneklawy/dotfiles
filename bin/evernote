@@ -1,0 +1,12 @@
+#!/bin/bash
+xhost +
+
+docker run -it -d \
+  -v /tmp/.X11-unix:/tmp/.X11-unix \
+  -v /mnt/:/mnt/local \
+  -v $HOME/evernote_backup:/root/evernote \
+  -e DISPLAY=unix$DISPLAY \
+  --cpuset-cpus 0 \
+  --name saherevernote saherevernote
+docker start saherevernote
+docker exec saherevernote wine .wine/drive_c/Program\ Files/Evernote/Evernote/Evernote.exe &

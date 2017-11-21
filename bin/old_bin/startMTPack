@@ -1,0 +1,5 @@
+#!/bin/bash
+
+gnome-terminal -t "flash debug" -e "tail -n 20 -f /home/saher/.macromedia/Flash_Player/Logs/flashlog.txt" &
+gnome-terminal -t "python server" -e  "python /home/saher/workspace/Flex/touchlib_flex/tests/pythonServerNew.py" &
+SimTouch &

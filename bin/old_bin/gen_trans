@@ -1,0 +1,20 @@
+#/bin/bash
+# Usage gen_trans DIR_NAME TASK
+#     DIR_NAME - directory containig wav- and text-files
+#     TASK_train.transcription - name of the output file
+
+# This script searches for the text-files in DIR_NAME directory
+# and prints out the corresponding description from text-files
+# in the form suitable for SphinxTrain
+TEXT_DIR=$1
+touch $2_train.transcription
+rm -f $2_train.transcription
+echo "Input dir: " $1
+for i in `find ./$TEXT_DIR -name '*.wav'`
+do
+t=`echo $i | sed -e 's\.wav\.text\g'`
+# text=`cat $t`
+cat $t >>  ${2}_train.transcription
+echo "		(" $t ")" >> ${2}_train.transcription
+done
+echo `find ./$TEXT_DIR -name '*.wav'| wc -l` files were listed in $2_train.transcription

@@ -1,0 +1,7 @@
+xrandr --output VGA1 --auto --rotate normal
+xrandr --output LVDS1 --auto --off
+xrandr --output HDMI1 --auto --rotate normal --primary
+xrandr --output VGA1 --right-of HDMI1
+
+
+restart_trayer

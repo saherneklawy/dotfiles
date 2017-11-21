@@ -1,0 +1,5 @@
+#!/bin/bash
+python2 -c "import xml.dom.minidom; import sys;\
+xml = xml.dom.minidom.parseString(sys.stdin.read());\
+pretty_xml_as_string = xml.toprettyxml();\
+print pretty_xml_as_string;"

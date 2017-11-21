@@ -1,0 +1,6 @@
+xrandr --output HDMI1 --auto
+xrandr --output HDMI1 --primary
+xrandr --output HDMI1 --left-of LVDS1
+#xrandr --output LVDS1 --right-of HDMI1
+
+restart_trayer

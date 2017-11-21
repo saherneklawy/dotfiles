@@ -1,0 +1,5 @@
+#!/bin/sh
+ping -c 3 10.0.0.138
+sleep 2
+ping -c 3 google.com
+sleep 2

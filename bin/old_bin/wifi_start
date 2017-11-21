@@ -1,0 +1,10 @@
+#!/bin/sh
+sudo ifconfig eth1 down
+sudo dhclient -r eth1
+sudo ifconfig eth1 up
+sudo route add default gw 10.0.0.138
+sudo iwconfig eth1 essid “DLINK_WIRELESS”
+sudo iwconfig eth1 key "deaf200cab"
+#****Additional Comand that may be needed -- sudo iwconfig eth1 key open <<<----See note below
+sudo iwconfig eth1 mode Managed
+sudo dhclient eth1

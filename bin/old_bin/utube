@@ -1,0 +1,2 @@
+#!/bin/bash
+mplayer -cache 2048 $(youtube-dl -g --max-quality 34 $1)

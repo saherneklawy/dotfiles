@@ -1,0 +1,4 @@
+#!/bin/sh
+IN=$2
+OUT=$1
+mencoder -ovc copy -oac copy -o $1 $2

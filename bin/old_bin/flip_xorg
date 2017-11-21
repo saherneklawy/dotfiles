@@ -1,0 +1,11 @@
+#!/bin/sh
+if grep TwinView /etc/X11/xorg.conf > /dev/null
+then 
+	gksudo cp /etc/X11/xorg.conf_single /etc/X11/xorg.conf	
+	gconftool-2 --type string --set /desktop/gnome/background/picture_filename "/home/saher/Pictures/final5.jpg"
+	zenity --info --text="now in single mode"
+else
+	gksudo cp /etc/X11/xorg.conf_twin /etc/X11/xorg.conf		
+	gconftool-2 --type string --set /desktop/gnome/background/picture_filename "/home/saher/Pictures/dualBackground.png"
+	zenity --info --text="now in twin mode"
+fi

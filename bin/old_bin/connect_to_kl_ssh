@@ -1,0 +1,4 @@
+#!/bin/sh
+echo "dante" | sudo -S echo ""
+sudo ssh -D8080 -D80 -D1935 -D443 -D1755 -D554 -D7070 -D1755 -D23399 -D58137 -D5355 -D30257 elneklaw@aixd3.rhrk.uni-kl.de
+sudo -k

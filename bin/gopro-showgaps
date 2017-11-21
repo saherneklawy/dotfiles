@@ -1,0 +1,44 @@
+#!/usr/bin/python2
+
+import os
+
+files = os.listdir(".")
+files = filter(lambda x: x[-4:] == '.JPG', files)
+
+files = sorted(files)
+
+filename_to_num = lambda x: int(x.split(".JPG", 1)[0].split("G",1)[-1])
+filename_diff = lambda (x,y): filename_to_num(y) - filename_to_num(x)
+
+def pair_to_expantion(x,y):
+  common_prefix = []
+  ind = 0
+  for i,j in zip(x,y):
+    if i==j:
+      common_prefix.append(i)
+    else:
+      break
+    ind += 1
+  return "%s{%s..%s}.JPG" %("".join(common_prefix), x[ind:-4], y[ind:-4])
+
+pairs = zip(files, files[1:])
+
+diffs = map(filename_diff, pairs)
+diffs.append(diffs[-1])
+
+groups = []
+current_group = []
+
+for i, e in enumerate(files):
+  if diffs[i] == 1:
+    current_group.append(e)
+  else:
+    current_group.append(e)
+    groups.append(current_group)
+    current_group = []
+
+for g in groups:
+  if len(g) > 1:
+    print pair_to_expantion(g[0], g[-1]), ": %d" %(filename_diff((g[0], g[-1])))
+  else:
+    print g[0], ": 1"

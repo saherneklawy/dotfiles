@@ -1,0 +1,5 @@
+xrandr --output VGA1 --auto
+xrandr --output LVDS1 --primary
+xrandr --output VGA1 --right-of LVDS1 --mode 800x600
+
+restart_trayer

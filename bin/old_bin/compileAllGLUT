@@ -1,0 +1,8 @@
+#!/bin/bash
+for i in $( ls *.c ); do             
+	g++ -lglut $i -o ${i%.c}
+done
+
+for i in $( ls *.cpp ); do             
+	g++ -lglut $i -o ${i%.cpp};
+done

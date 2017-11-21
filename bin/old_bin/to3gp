@@ -1,0 +1,2 @@
+#!/bin/sh
+ffmpeg -i $1 -vcodec h263 -s qcif -r 15 -b 100k -acodec libfaac -ac 1 -ar 32000 -ab 64k $2

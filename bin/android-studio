@@ -1,0 +1,4 @@
+#!/usr/bin/bash
+
+pushd /mnt/apps/android-studio
+./bin/studio.sh

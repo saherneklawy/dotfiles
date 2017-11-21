@@ -1,0 +1,8 @@
+#!/bin/sh
+#cd .
+iverilog *.v
+vpp a.out > dump.vcd
+chmod +x dump.vcd
+./dump.vcd
+gtkwave dump.vcd
+

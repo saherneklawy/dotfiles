@@ -1,0 +1,5 @@
+#!/bin/sh
+mplayer $1 -ao pcm
+lame -f audiodump.wav ${1%.*}.mp3
+rm audiodump.wav
+

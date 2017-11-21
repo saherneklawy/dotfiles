@@ -1,0 +1,2 @@
+#!/bin/bash
+python2 -c "import urllib2; print urllib2.unquote(raw_input())"

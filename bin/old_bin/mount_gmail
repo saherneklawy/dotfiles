@@ -1,0 +1,2 @@
+#!/bin/sh
+mount.gmailfs none /home/saher/gmail_germanyPics -o username=germany.trip.summer.2008,password=dantemohhom,fsname=zOlRRa
