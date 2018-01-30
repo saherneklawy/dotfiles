@@ -64,7 +64,7 @@ myTerminal    = "gnome-terminal"
 {-myTerminal    = "xterm"-}
 myModMask     = mod4Mask -- Win key or Super_L
 myBorderWidth = 1
-myWorkspaces    = ["1:web","2:code","3:terms","4", "5", "6:srvs", "7", "8", "9"] ++ map show [10..22]
+myWorkspaces    = ["1:web","2:code","3:terms","4", "5", "6:srvs", "7", "8", "9", "10", "11:slack"] ++ map show [12..22]
 
 -- Whether focus follows the mouse pointer.
 myFocusFollowsMouse :: Bool
@@ -82,7 +82,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm,               xK_p     ), spawn "/usr/bin/bash -l -i -c '/home/saher/bin/dmenu_run'")
     , ((modm,               xK_s     ), spawn "/usr/bin/bash -l -i -c '/home/saher/bin/spell_check'")
     , ((modm,               xK_c     ), spawn "/usr/bin/bash -l -i -c '/home/saher/bin/dmenu_calc'")
-    , ((modm,               xK_a     ), spawn "/usr/bin/bash -l -i -c '/usr/bin/nautilus'")
+    , ((modm,               xK_a     ), spawn "/usr/bin/bash -l -i -c '/usr/bin/thunar'")
 
 
     -- close focused window
@@ -208,6 +208,7 @@ myManageHook = composeOne [ isFullscreen -?> doFullFloat
       , className =? "Google-chrome" <&&> role =! "pop-up" -?> doShift "1:web"
       , className =? "Pidgin"                      -?> doShift "8"
       , className =? "Xchat"                      -?> doShift "8"
+      , className =? "Slack"                      -?> doShift "11:slack"
       , title =? "mongod - server"                 -?> viewShift "6:srvs"
       , title =? "elasticsearch - server"          -?> viewShift "6:srvs" ]
     where viewShift = doF . liftM2 (.) W.greedyView W.shift
