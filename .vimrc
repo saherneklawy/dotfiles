@@ -46,7 +46,7 @@ Bundle "jonathanfilip/vim-lucius"
 Bundle 'kien/ctrlp.vim'
 Bundle 'aaronbieber/quicktask'
 Bundle 'ervandew/supertab'
-Bundle 'scrooloose/syntastic'
+Bundle 'vim-syntastic/syntastic'
 Bundle 'scrooloose/nerdtree'
 Bundle 'godlygeek/tabular'
 Bundle 'plasticboy/vim-markdown'
@@ -164,7 +164,9 @@ set wildignore+=*.class
 let g:syntastic_ruby_checkers = ['mri', 'rubocop']
 let g:syntastic_ruby_rubocop_args = "-R"
 
-let g:syntastic_javascript_checkers = ['gjslint', 'jshint']
+let g:syntastic_javascript_checkers = ['eslint']
+" execute eslint with --fix flag
+"let g:syntastic_javascript_eslint_args = ['--fix']
 let g:syntastic_html_checkers = ['tidy']
 let g:syntastic_css_checkers = ['csslint']
 
@@ -173,6 +175,7 @@ let g:syntastic_css_checkers = ['csslint']
 let g:syntastic_mode_map = { 'mode': 'passive',
                            \ 'active_filetypes': [],
                            \ 'passive_filetypes': [] }
+let g:syntastic_always_populate_loc_list = 1
 
 
 au BufRead,BufNewFile *.rabl setfiletype ruby
@@ -233,7 +236,8 @@ let g:airline_section_y = ''
 let g:airline_section_z = '%p%%:%l:%c'
 
 "http://vim.wikia.com/wiki/Encryption
-setlocal cm=blowfish
+"setlocal cm=blowfish
+if has('cryptv') | set cryptmethod=blowfish | endif
 
 let r_syntax_folding = 1
 set nofoldenable

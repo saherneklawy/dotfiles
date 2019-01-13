@@ -24,7 +24,7 @@
     log-compact = log --oneline --decorate
     ls = log --stat
     # list branches sorted by last modified
-    b = "!git for-each-ref --sort='authordate' --format=\"%(authordate)%09%(objectname:short)%09   %(refname)\" refs/heads | sed -e 's-refs/heads/--' | sed \"s/\\(.*\\)  \\($(git rev-parse --abbrev-ref HEAD)\\)$/$(echo -e \"\\e[32m\")\\1* \\2$(echo -e \"\\e[0m\")/\""
+  b = "!git for-each-ref --sort='authordate' --format=\"%(authordate)%09%(objectname:short)%09   %(refname)\" refs/heads | sed -e 's-refs/heads/--'  | sed 's/\\//-/' | sed \"s/\\(.*\\)  \\($(git rev-parse --abbrev-ref HEAD | sed 's/\\//-/')\\)$/$(echo -e \"\\e[32m\")\\1* \\2$(echo -e \"\\e[0m\")/\""
     # one-line log
     l = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
     # show commit diff with master
@@ -36,6 +36,8 @@
     contains = branch -r --contains
     root = rev-parse --show-toplevel
     deleted = log --diff-filter=D --summary
+    merge-rebase = "!git rebase -i -X theirs $(git merge-base $1 HEAD)"
+  commit-diff= "!git rev-list --reverse --no-merges --date=short --pretty=format:\"%C(yellow)%h %ad%Creset %s%Cblue [%cn]%Creset\" --cherry-pick --left-right HEAD...$1"
 [core]
 	editor = vim
 [push]
