@@ -1,0 +1,11 @@
+#--pager
+#less -r
+
+--color
+
+--ignore-dir=node_modules/
+
+# Colors, see http://perldoc.perl.org/Term/ANSIColor.html for values
+--color-filename=italic underline
+--color-match=green
+--color-lineno=blue
